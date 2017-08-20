@@ -59,13 +59,13 @@ module Spina
     end
 
     def create_user
-      return if User.exists? && !no?('A user already exists. Skip? [Yn]')
+      return if Spina::User.exists? && !no?('A user already exists. Skip? [Yn]')
       email = 'admin@domain.com'
       email = ask("Please enter an email address for your first user: [#{email}]").presence || email
       password = 'password'
       password = ask("Create a temporary password: [#{password}]").presence || password
       @temporary_password = password
-      User.create name: 'admin', email: email, password: password, admin: true
+      Spina::User.create name: 'admin', email: email, password: password, admin: true
     end
 
     def bootstrap_spina
